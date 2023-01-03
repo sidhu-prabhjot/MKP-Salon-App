@@ -1,5 +1,7 @@
 package sidhu.graph;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -23,6 +25,27 @@ public class UserInterface extends javax.swing.JFrame {
         
         //set the current usable ID on the GUI
         appointmentIDOutput.setText(appointmentRecords.getMaxID() + "");
+        
+        //add existing customers to combobox in appointment records page
+        for(int i = 0; i < customerList.size(); i++) {
+            //get first name, last name, and ID
+            String firstName = customerList.get(i).getFirstName();
+            String lastName = customerList.get(i).getLastName();
+            String fullName = firstName + " " + lastName;
+            int ID = customerList.get(i).getID();
+            
+            //create new customer chooser object
+            ComboItem newItem = new ComboItem(fullName, ID);
+            
+            customerChooser.addItem(newItem);
+        }
+        
+        //set the date field in appointment records to today's date
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String today = dateFormat.format(calendar.getTime());
+        
+        recordDateInput.setText(today);
         
     }
 
@@ -156,7 +179,6 @@ public class UserInterface extends javax.swing.JFrame {
         });
 
         customerChooser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        customerChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aunty 1", "Aunty 2", "Aunty 3", "Aunty 4" }));
 
         addFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addFirstNameLabel.setText("Customer*");
@@ -766,8 +788,12 @@ public class UserInterface extends javax.swing.JFrame {
     private void finishRecordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishRecordBtnActionPerformed
         
         //get values from inputs
-        //JUST A RANDOM CUSTOMER ID FOR NOW
-        int customerID = 123456;
+        
+        //get selected customer
+        ComboItem chosenCustomer = (ComboItem)customerChooser.getSelectedItem();
+        int customerID = chosenCustomer.getValue();
+        
+        //get other appointment paramaters
         String appointmentType = (String)recordTypeChooser.getSelectedItem();
         String date = recordDateInput.getText();
         double revenue = Double.parseDouble(recordRevenueInput.getText());
@@ -939,7 +965,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel addLastNameLabel2;
     private javax.swing.JLabel appointmentIDOutput;
     private javax.swing.JPanel appointmentPanel;
-    private javax.swing.JComboBox<String> customerChooser;
+    private javax.swing.JComboBox<ComboItem> customerChooser;
     private javax.swing.JLabel customerIDOutput;
     private javax.swing.JPanel customerPanel;
     private javax.swing.JButton findAppointmentBtn;
