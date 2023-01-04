@@ -10,12 +10,13 @@ import java.util.ArrayList;
  */
 public class FileWrite {
     
+    private static String customerRecordsPath = "src/main/java/sidhu/graph/DataFiles/CustomerRecords.txt";
+    private static String appointmentRecordsPath = "src/main/java/sidhu/graph/DataFiles/AppointmentRecords.txt";
+    
     //write information from customer object to file
     public static void writeCustomersToFile(ArrayList<Customer> customers, String fileName) {
         
-        fileName = "src/main/java/sidhu/graph/DataFiles/CustomerRecords.txt";
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(customerRecordsPath))) {
           for (Customer customer : customers) {
             writer.write(String.format("%d,%s,%s,%s,%s\n",
                 customer.getID(), 
@@ -24,6 +25,7 @@ public class FileWrite {
                 customer.getPhoneNumber(), 
                 customer.getEmail()));
           }
+          writer.close();
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -32,9 +34,7 @@ public class FileWrite {
     //write information from customer object to file
     public static void writeAppointmentsToFile(ArrayList<Appointment> appointments, String fileName) {
         
-        fileName = "src/main/java/sidhu/graph/DataFiles/AppointmentRecords.txt";
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(appointmentRecordsPath))) {
           for (Appointment appointment : appointments) {
             writer.write(String.format("%d,%d,%s,%s,%.2f\n",
                 appointment.getID(), 
@@ -43,9 +43,26 @@ public class FileWrite {
                 appointment.getDate(), 
                 appointment.getRevenue()));
           }
+          writer.close();
         } catch (IOException e) {
           e.printStackTrace();
         }
+    }
+    
+    public static void setCustomerRecordsPath(String filePath) {
+        customerRecordsPath = filePath;
+    }
+    
+    public static String getCustomerRecordsPath() {
+        return customerRecordsPath;
+    }
+    
+    public static void setAppointmentRecordsPath(String filePath) {
+        appointmentRecordsPath = filePath;
+    }
+    
+    public static String getAppointmentRecordsPath() {
+        return appointmentRecordsPath;
     }
     
 }

@@ -1,9 +1,1 @@
-2,first,last,0000000000,outlook.com
-3,prabhjot,sidhu,5198308660,sidhu.prabhjot@outlook.com
-4,kulvinder,singh,5198238664,kul.sidhu@outlook.com
-5,prabhjot,singh,5191231234,prabhjotsidhu123@hotmail.com
-6,Kuldip,Sidhu,5194005477,kuldipsd7@hotmail.com
-7,Komal,Sidhu,5198295475,komalsd@live.com
-8,Koko,Sidhu,911,koko.sidhu@outlook.com
-9,Kratos,Greek,1111111111,kratos@live.com
-10,Komal,Sidhu,1234567890,komal@outlook.com
+1,Prabhjot,Sidhu,5198308660,sidhu.prabhjot@outlook.com

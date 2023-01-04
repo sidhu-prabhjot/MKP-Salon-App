@@ -26,19 +26,7 @@ public class UserInterface extends javax.swing.JFrame {
         //set the current usable ID on the GUI
         appointmentIDOutput.setText(appointmentRecords.getMaxID() + "");
         
-        //add existing customers to combobox in appointment records page
-        for(int i = 0; i < customerList.size(); i++) {
-            //get first name, last name, and ID
-            String firstName = customerList.get(i).getFirstName();
-            String lastName = customerList.get(i).getLastName();
-            String fullName = firstName + " " + lastName;
-            int ID = customerList.get(i).getID();
-            
-            //create new customer chooser object
-            ComboItem newItem = new ComboItem(fullName, ID);
-            
-            customerChooser.addItem(newItem);
-        }
+        updateCustomerChooser();
         
         //set the date field in appointment records to today's date
         Calendar calendar = Calendar.getInstance();
@@ -121,6 +109,13 @@ public class UserInterface extends javax.swing.JFrame {
         addCustomerBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        customerRecordsFilePathInput = new javax.swing.JTextField();
+        setCustomerRecordsPathBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        AppointmentRecordsFilePathInput = new javax.swing.JTextField();
+        setAppointmentRecordsFilePathBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -499,7 +494,7 @@ public class UserInterface extends javax.swing.JFrame {
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addCustomerLabel1)
                     .addComponent(addCustomerLabel)
@@ -551,12 +546,12 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(customerPanelLayout.createSequentialGroup()
                     .addGap(28, 28, 28)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(29, Short.MAX_VALUE)))
+                    .addContainerGap(42, Short.MAX_VALUE)))
             .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(customerPanelLayout.createSequentialGroup()
                     .addGap(608, 608, 608)
                     .addComponent(addCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(788, Short.MAX_VALUE)))
+                    .addContainerGap(801, Short.MAX_VALUE)))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,7 +630,7 @@ public class UserInterface extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1553, Short.MAX_VALUE)
+            .addGap(0, 1566, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,7 +643,7 @@ public class UserInterface extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1553, Short.MAX_VALUE)
+            .addGap(0, 1566, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,6 +651,70 @@ public class UserInterface extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Supplies", jPanel1);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Customer records file path:");
+
+        customerRecordsFilePathInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        setCustomerRecordsPathBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setCustomerRecordsPathBtn.setText("Set");
+        setCustomerRecordsPathBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setCustomerRecordsPathBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Appointment records file path:");
+
+        AppointmentRecordsFilePathInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        setAppointmentRecordsFilePathBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setAppointmentRecordsFilePathBtn.setText("Set");
+        setAppointmentRecordsFilePathBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAppointmentRecordsFilePathBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(customerRecordsFilePathInput, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                    .addComponent(AppointmentRecordsFilePathInput))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(setCustomerRecordsPathBtn)
+                    .addComponent(setAppointmentRecordsFilePathBtn))
+                .addContainerGap(724, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(customerRecordsFilePathInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setCustomerRecordsPathBtn))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(AppointmentRecordsFilePathInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(setAppointmentRecordsFilePathBtn))
+                .addContainerGap(609, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Settings", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -841,6 +900,9 @@ public class UserInterface extends javax.swing.JFrame {
         
         //FOR NOW, JUST AUTOMATICALLY SAVE ALL CUSTOMERS
         FileWrite.writeCustomersToFile(customerRecords.toArrayList(), "");
+        
+        //update customer chooser combobox on appointments page
+        updateCustomerChooser();
     }//GEN-LAST:event_addCustomerBtnActionPerformed
 
     private void findAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findAppointmentBtnActionPerformed
@@ -903,6 +965,54 @@ public class UserInterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_findAppointmentBtnActionPerformed
 
+    private void setCustomerRecordsPathBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setCustomerRecordsPathBtnActionPerformed
+        //get filepath from input
+        String newFilePath = customerRecordsFilePathInput.getText();
+        
+        FileRead.setCustomerRecordsPath(newFilePath);
+        FileWrite.setCustomerRecordsPath(newFilePath);
+        
+        updateInUseRecords();
+
+    }//GEN-LAST:event_setCustomerRecordsPathBtnActionPerformed
+
+    private void setAppointmentRecordsFilePathBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAppointmentRecordsFilePathBtnActionPerformed
+        //get filepath from input
+        String newFilePath = AppointmentRecordsFilePathInput.getText();
+        
+        FileRead.setAppointmentRecordsPath(newFilePath);
+        FileWrite.setAppointmentRecordsPath(newFilePath);
+        
+        updateInUseRecords();
+
+    }//GEN-LAST:event_setAppointmentRecordsFilePathBtnActionPerformed
+
+    private void updateInUseRecords() {
+        customerList = FileRead.readCustomers("hello");
+        appointmentList = FileRead.readAppointments("hello");
+        customerRecords = new CustomerRecords(customerList);
+        appointmentRecords = new AppointmentRecords(appointmentList);
+    }
+    
+    //update the customer combobox with a list of customer objects
+    private void updateCustomerChooser() {
+        customerChooser.removeAllItems();
+        ArrayList<Customer> customers = customerRecords.toArrayList();
+        
+        //add existing customers to combobox in appointment records page
+        for(int i = 0; i < customers.size(); i++) {
+            //get first name, last name, and ID
+            String firstName = customers.get(i).getFirstName();
+            String lastName = customers.get(i).getLastName();
+            String fullName = firstName + " " + lastName;
+            int ID = customers.get(i).getID();
+            
+            //create new customer chooser object
+            ComboItem newItem = new ComboItem(fullName, ID);
+            
+            customerChooser.addItem(newItem);
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -941,6 +1051,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AppointmentRecordsFilePathInput;
     private javax.swing.JButton addCustomerBtn;
     private javax.swing.JTextField addCustomerEmail;
     private javax.swing.JTextField addCustomerFirstName;
@@ -968,6 +1079,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JComboBox<ComboItem> customerChooser;
     private javax.swing.JLabel customerIDOutput;
     private javax.swing.JPanel customerPanel;
+    private javax.swing.JTextField customerRecordsFilePathInput;
     private javax.swing.JButton findAppointmentBtn;
     private javax.swing.JTextField findAppointmentCustomerID;
     private javax.swing.JTextField findAppointmentDate;
@@ -990,7 +1102,10 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel findTypeLabel;
     private javax.swing.JButton finishRecordBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1004,5 +1119,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JTextField recordDateInput;
     private javax.swing.JTextField recordRevenueInput;
     private javax.swing.JComboBox<String> recordTypeChooser;
+    private javax.swing.JButton setAppointmentRecordsFilePathBtn;
+    private javax.swing.JButton setCustomerRecordsPathBtn;
     // End of variables declaration//GEN-END:variables
 }

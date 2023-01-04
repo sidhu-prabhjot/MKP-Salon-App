@@ -57,7 +57,7 @@ public class AppointmentRecords {
 
     private int getGreatestID(Node node) {
         if (node == null) {
-            return Integer.MIN_VALUE;
+            return 0;
         }
         int rightID = getGreatestID(node.right);
         return Math.max(node.appointment.getID(), rightID);
