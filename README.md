@@ -13,4 +13,6 @@ The financials and supplies tracking features are still in development. Data sto
 The programming language being used to develop the app is Java, and the application is being developed using object-oriented programming principles. The application is being developed in the Netbeans IDE, and to Java Swing is being utilised to create the GUI.
 
 ## Images
+![My Image](customer.png)
+![My Image](appointment.png)
 
